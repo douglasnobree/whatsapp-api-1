@@ -95,8 +95,8 @@ export class InstanceService {
 
     try {
       const instanceName = instance?.instanceName || ulid(Date.now());
-
-      const create = this.repository.instance.create({
+      console.log(instanceName)
+      const create = await this.repository.instance.create({
         data: {
           name: instanceName,
           description: instance.description,
@@ -120,7 +120,7 @@ export class InstanceService {
           },
         },
       });
-
+      console.log(create)
       return create;
     } catch (error) {}
   }
