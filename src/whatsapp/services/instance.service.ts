@@ -199,7 +199,7 @@ export class InstanceService {
     return instances;
   }
 
-  public async deleteInstance(instance: InstanceDto, force = false) {
+  public async deleteInstance(instance: InstanceDto, force = true) {
     try {
       const c1 = await this.repository.auth.count({
         where: { Instance: { name: instance.instanceName } },
@@ -219,13 +219,12 @@ export class InstanceService {
       const c6 = await this.repository.activityLogs.count({
         where: { Instance: { name: instance.instanceName } },
       });
-
-      if (!force && (c1 || c2 || c3 || c4 || c5 || c6)) {
-        throw [
-          new Error('This instance has dependencies and cannot be deleted'),
-          new Error('"force" parameter to delete all dependencies'),
-        ];
-      }
+      // if (!force && (c1 || c2 || c3 || c4 || c5 || c6)) {
+      //   throw [
+      //     new Error('This instance has dependencies and cannot be deleted'),
+      //     new Error('"force" parameter to delete all dependencies'),
+      //   ];
+      // }
 
       this.waMonitor.waInstances.delete(instance.instanceName);
 

@@ -368,7 +368,7 @@ export class WAStartupService {
 
         this.sendDataWebhook('connectionUpdated', {
           instance: this.instance.name,
-          ...this.stateConnection,
+          ...this.stateConnection, 
         });
 
         this.sendDataWebhook('statusInstance', {
@@ -844,8 +844,6 @@ export class WAStartupService {
 
         messageRaw['info'] = { type };
 
-        this.logger.log('Type: ' + type);
-        console.log(messageRaw);
 
         this.ws.send(this.instance.name, 'messages.upsert', messageRaw);
 
@@ -1258,7 +1256,7 @@ export class WAStartupService {
             delete m[key];
           }
         }
-
+        console.log('testando',m);
         this.client.ev.emit('messages.upsert', { messages: [m], type: 'notify' });
 
         return {

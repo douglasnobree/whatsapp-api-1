@@ -79,24 +79,24 @@ export class JwtGuard {
 
     const jwtOpts = this.configService.get<Auth>('AUTHENTICATION').JWT;
     try {
-      const [bearer, token] = req.get('authorization')?.split(' ');
+      // const [bearer, token] = req.get('authorization')?.split(' ');
 
-      if (bearer.toLowerCase() !== 'bearer') {
-        throw new UnauthorizedException();
-      }
+      // if (bearer.toLowerCase() !== 'bearer') {
+      //   throw new UnauthorizedException();
+      // }
 
-      if (!isJWT(token)) {
-        throw new UnauthorizedException();
-      }
+      // if (!isJWT(token)) {
+      //   throw new UnauthorizedException();
+      // }
 
-      const param = req.params as unknown as InstanceDto;
-      const decode = jwt.verify(token, jwtOpts.SECRET, {
-        ignoreExpiration: jwtOpts.EXPIRIN_IN === 0,
-      }) as JwtPayload;
+      // const param = req.params as unknown as InstanceDto;
+      // const decode = jwt.verify(token, jwtOpts.SECRET, {
+      //   ignoreExpiration: jwtOpts.EXPIRIN_IN === 0,
+      // }) as JwtPayload;
 
-      if (param.instanceName !== decode.instanceName || name !== decode.apiName) {
-        throw new UnauthorizedException();
-      }
+      // if (param.instanceName !== decode.instanceName || name !== decode.apiName) {
+      //   throw new UnauthorizedException();
+      // }
 
       return next();
     } catch (error) {
