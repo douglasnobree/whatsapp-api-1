@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'whatsapp-api',
-      script: 'dist/main.js',
+      script: 'dist/src/main.js',
       instances: 1, // Ou "max" para usar múltiplos núcleos
       autorestart: true,
       watch: false, // Habilite se quiser que o PM2 monitore mudanças no código
@@ -18,13 +18,13 @@ module.exports = {
 
   deploy: {
     production: {
-      user: 'seu-usuario',
-      host: 'seu-servidor.com',
-      ref: 'origin/master',
-      repo: 'seu-repositorio.git', // Repositório de onde puxar o código
-      path: '/caminho/do/projeto',
+      user: 'jarbas',
+      host: 'smartmonitor.ifce.edu.br',
+      ref: 'origin/main',
+      repo: 'douglasnobree/whatsapp-api-1.git', // Repositório de onde puxar o código
+      path: '/home/jarbas/iot-whatsapp',
       'post-deploy':
-        'export PATH=$PATH:/home/seu-usuario/.nvm/versions/node/v20.18.1/bin && yarn install && npx prisma generate && yarn build && pm2 reload ecosystem.config.js --env production',
+        'export PATH=$PATH:/home/seu-usuario/.nvm/versions/node/v20.18.1/bin && yarn install && npx prisma db push && npx prisma generate && yarn build && pm2 reload ecosystem.config.js --env production',
     },
   },
 };
